@@ -1,1 +1,86 @@
-/* TODO: 자유롭게 바탕화면 시스템의 CSS를 만들어 보세요! */
+
+.button {
+  position : absolute;
+  right : 0px;
+}
+
+.Icon {
+  position : absolute;
+}
+
+.Notepad {
+  position: absolute;
+  top : 30px;
+  left : 50px;
+  width : 400px;
+  height : 300px;
+}
+
+.Notepad_option_moving {
+  position : relative;
+  width : auto;
+  height : 20px;
+  background-color: rgb(255,187,0);
+  border: 1px solid rgb(255,187,0);
+}
+
+.Notepad_note {
+  position : absolute;
+  top : 50px;
+  left : 50px;
+  height : 200px;
+  width : 300px;
+}
+
+.Notepad_option_saving {
+  position : relative;
+  top : 0px;
+  width: 23px;
+  height : 20px;
+}
+
+.Notepad_option_closing {
+  position : relative;
+  top : 0px;
+  height : 20px;
+  width: 23px;
+}
+
+.Folder {
+  position : absolute;
+}
+
+.Window {
+  position: absolute;
+  top : 30px;
+  left : 50px;
+  width : 400px;
+  height : 300px;
+}
+
+.Window_option_moving {
+  position : relative;
+  width : auto;
+  background-color: rgb(0,84,255);
+}
+
+.Window_option_maximizing {
+  position : relative;
+  top : 0px;
+  width: 23px;
+  height : 20px;
+}
+
+.Window_option_resizing {
+  position : relative;
+  top : 0px;
+  width:23px;
+  height:20px;
+}
+
+.Window_option_closing {
+  position : relative;
+  top : 0px;
+  width: 23px;
+  height : 20px;
+}
