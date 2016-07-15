@@ -10,15 +10,30 @@ body {
 
 .main {
 	background-color: skyblue;
+	position : absolute;
+	vertical-align: top;
+	top : 0;
+	left : 200px;
+	height : inherit;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 .left {
 	background-color: pink;
+	width : 200px;
+	vertical-align: top;
+	top : 0;
+	height : inherit;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 .right {
 	background-color: greenyellow;
+	position: absolute;;
+	width : 300px;
+	vertical-align: top;
+	top: 0;
+	right : 0;
+	height : inherit;
 	/* TODO: 이 곳을 채우세요! */
 }

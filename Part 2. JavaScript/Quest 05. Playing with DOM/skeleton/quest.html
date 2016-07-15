@@ -34,16 +34,26 @@
 
 		<script>
 			var row1Squares = document.querySelectorAll('.row1 .square');
-
-			for(var i = 0; i < row1Squares.length; i++) {
+			for(var i = 0; i<row1Squares.length; i++)
+      {
 				var node = row1Squares[i];
-				/* TODO: node 변수를 어떻게 조작해야 할까요? */
+				node.onclick=function()
+        {
+          this.style.backgroundColor = "yellow";
+        };
+        /* TODO: node 변수를 어떻게 조작해야 할까요? */
 			}
 
 			var row2Squares = document.querySelectorAll('.row2 .square');
 
-			for(var i = 0; i < row2Squares.length; i++) {
+			for(var i = 0; i < row2Squares.length; i++)
+      {
 				var node = row2Squares[i];
+        node.onclick=function()
+        {
+        this.classList.remove('square');
+        this.classList.add('enabled');
+        }
 				/* TODO: node 변수를 어떻게 조작해야 할까요? */
 			}
 		</script>

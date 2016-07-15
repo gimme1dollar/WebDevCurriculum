@@ -10,10 +10,17 @@ body {
 
 aside {
 	background-color: pink;
+	width : 200px;
+	height : inherit;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 .main {
 	background-color: skyblue;
+	position: absolute;
+	vertical-align: top;
+	top : 0;
+	left : 200px;
+	height : inherit;
 	/* TODO: 이 곳을 채우세요! */
 }

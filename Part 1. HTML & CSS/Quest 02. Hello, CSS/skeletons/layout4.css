@@ -14,25 +14,42 @@ body {
 
 .main {
 	background-color: skyblue;
-	/* TODO: 이 곳을 채우세요! */
+  position:absolute;
+  vertical-align: top;
+  top: 0;
+  left: 200px;
+  width: auto;
+  /* TODO: 이 곳을 채우세요! */
 }
 
 .main header {
 	background-color: lightgray;
+	display: -webkit-flex;
+  width: auto;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 .left {
 	background-color: pink;
+  width: 200px;
+  left: 0;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 .right {
 	background-color: greenyellow;
+  width: 300px;
+  position: absolute;
+  vertical-align: top;
+  top: 0;
+  right: 0;
 	/* TODO: 이 곳을 채우세요! */
 }
 
 footer {
 	background-color: yellow;
+  position: absolute;
+  bottom: 0;
+  width: inherit;
 	/* TODO: 이 곳을 채우세요! */
 }
