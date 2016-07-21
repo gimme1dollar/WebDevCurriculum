@@ -4,8 +4,6 @@ var express = require('express'),
 var bodyParser = require('body-parser');
 var fs = require("fs");
 var session = require("express-session");
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
-var db        = {};
 
 var user = [{
     username: "Yhi",
