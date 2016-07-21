@@ -4,7 +4,8 @@ var express = require('express'),
 var bodyParser = require('body-parser');
 var fs = require("fs");
 var session = require("express-session");
-var $ = require('jQuery');
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
+var db        = {};
 
 var user = [{
     username: "Yhi",
@@ -40,66 +41,99 @@ app.post("/users", function(req, res) {
     var username = req.body.username,
         password = req.body.password;
 
-		for(var i=0; i<3; i++) {
-			if((username == user[i].username) && (password == user[i].password)) {
-				sess.auth_token = user[i].auth_token;
-				res.redirect('/notepad');
-				break;
-			} else {
-				res.redirect('/');
-			}
+	for(var i=0; i<3; i++) {
+		if((username == user[i].username) && (password == user[i].password)) {
+			sess.auth_token = user[i].auth_token;
+			res.redirect('/notepad');
+			return;
 		}
+	}
+	res.redirect('/');
 });
 
 app.get('/notepad', function (req, res) {
     var sess = req.session;
 
-		for(var i=0; i<3; i++) {
-			if(user[i].auth_token == sess.auth_token) {
-				res.sendFile(path.join(__dirname + '/index.html'));
-				break;
-			} else {
-				res.redirect('/');
-			}
+	for(var i=0; i<3; i++) {
+		if(user[i].auth_token == sess.auth_token) {
+			res.sendFile(path.join(__dirname + '/index.html'));
+			return;
 		}
+	}
+	res.redirect('/');
 });
 
 app.post("/note", function(req, res) {
-		var sess = req.session;
-		var filename = req.body.content;
-    var content = req.body.content;
+	var sess = req.session;
+	var filename = req.body.filename;
+	var dirname;
+  var content = req.body.content;
 
-		fs.writeFile("notes/" + filename + ".txt", content, function(err) {
-        if(err) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({
-                status: "failure"
-            }));
-        }
-
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({
-            status: "success"
-        }));
-    });
+	for(var i=0; i<3; i++) {
+		if(user[i].auth_token == sess.auth_token) {
+			dirname = "user" + i;
+			fs.writeFile("notes/" + dirname + "/" + filename + ".txt", content, function(err) {
+					if(err) {
+							res.setHeader('Content-Type', 'application/json');
+							res.send(JSON.stringify({
+									status: "failure"
+							}));
+					} else {
+							res.setHeader('Content-Type', 'application/json');
+							res.send(JSON.stringify({
+									status: "success"
+						}));
+					}
+			});
+			return;
+		}
+	}
 });
 
-app.get("/note", function(req, res) {
-    fs.readFile("notes/" + "note.txt", "utf-8", function(err, content) {
-        if(err) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({
-                status: "failure"
-            }));
-        }
+/* app.get("/note", function(req, res) {
+	var filename = req.body.filename;
+	var content = req.body.content;
 
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({
-            status: "success",
-            content: content
-        }));
-    });
-});
+	for(var i=0; i<3; i++) {
+    if(req.session.auth_token == user[i].auth_token) {
+      var filenames = fs.readdirSync("notes/user" + i);
+			var dirname = "notes/user" + i;
+			for(var i=0; i < filenames.length; i++) {
+
+				filename.push(filenames, function(err, content) {
+	    		if(err) {
+          		res.setHeader('Content-Type', 'application/json');
+	        		res.json(JSON.stringify({
+	            		status: "failure"
+	        		}));
+	    		} else {
+							res.setHeader('Content-Type', 'application/json');
+	      			res.json(JSON.stringify({
+	          			status: "success",
+									filename: filename,
+	      			}));
+					}
+				});
+
+				content.push(fs.readFileSync(dirname + '/' + filenames[i], "utf-8", function(err, content) {
+	    		if(err) {
+	        		res.setHeader('Content-Type', 'application/json');
+	        		res.json(JSON.stringify({
+	            		status: "failure"
+	        		}));
+	    		} else {
+							res.setHeader('Content-Type', 'application/json');
+		    			res.json(JSON.stringify({
+	          			status: "success",
+	            		content: content
+	      			}));
+						}
+				}));
+  		}
+		}
+		break;
+	}
+}); */
 
 
 app.listen(3000, function () {
